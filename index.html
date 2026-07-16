@@ -112,7 +112,7 @@
         <input id="dim" type="range" min="0" max="60" value="32" step="1" />
       </div>
       <div style="background:var(--bg-secondary);border-radius:var(--radius);padding:12px 14px;font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;">
-        Pick one or more platforms above. The <span style="color:#1D9E75;font-weight:500;">green box</span> is the area safe across everything you've selected — keep your text, logos, and faces inside it.
+        Pick one or more platforms above. The <span style="color:#1D9E75;font-weight:500;">green box</span> is the area safe across everything you've selected — keep your text, logos, faces, and any <strong>#AD</strong> overlay inside it. Turn on <span style="color:#E24B4A;font-weight:500;">IG Profile Grid (4:5)</span> to also respect the 1080×1350 crop your Reel gets on the profile.
       </div>
       <div id="legend" style="display:flex;flex-direction:column;gap:6px;font-size:13px;"></div>
     </div>
@@ -122,11 +122,14 @@
 
 <script>
 (function(){
+  // Margins are % of the 9:16 frame; the safe zone is the area inside them.
+  // Instagram Reels & TikTok values follow current platform best-practices.
   var PRESETS = [
-    {id:'meta',   label:'Meta Reels / Stories', color:'#378ADD', top:14, bottom:20, left:6,  right:6,  on:true},
-    {id:'tiktok', label:'TikTok',               color:'#D4537E', top:6,  bottom:22, left:6,  right:11, on:true},
-    {id:'shorts', label:'YouTube Shorts',       color:'#E24B4A', top:9,  bottom:18, left:4,  right:11, on:false},
-    {id:'snap',   label:'Snapchat',             color:'#BA7517', top:11, bottom:10, left:6,  right:6,  on:false}
+    {id:'ig-reels', label:'Instagram Reels',       color:'#D4537E', top:14, bottom:22, left:6,  right:8,  on:true},
+    {id:'ig-grid',  label:'IG Profile Grid (4:5)', color:'#E24B4A', top:15, bottom:15, left:0,  right:0,  on:false},
+    {id:'tiktok',   label:'TikTok',                color:'#378ADD', top:8,  bottom:20, left:6,  right:15, on:true},
+    {id:'shorts',   label:'YouTube Shorts',        color:'#7C3AED', top:9,  bottom:18, left:4,  right:11, on:false},
+    {id:'snap',     label:'Snapchat',              color:'#BA7517', top:11, bottom:10, left:6,  right:6,  on:false}
   ];
   var SPEEDS=[0.25,0.5,1,1.5,2];
   var fitCover=true, curSpeed=1, seeking=false;
